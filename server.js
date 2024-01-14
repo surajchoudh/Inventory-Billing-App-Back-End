@@ -5,8 +5,9 @@ const { connectDB } = require('./config/db'); // Import the connectDB function
 const errorHandler = require('./middleware/errorMiddleware');
 const jwt = require('jsonwebtoken');
 const User = require('./models/user');
-const bcrypt = require('bcrypt');
 const invoiceRoutes = require('./routes/invoiceRoutes');
+const bcrypt = require('bcryptjs');
+
 
 
 const app = express();
