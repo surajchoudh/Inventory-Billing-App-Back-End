@@ -34,7 +34,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         // Find the user by email
         const user = await User.findOne({ email });
-
+        console.log(await User.find({}));
 
         // If user not found or password doesn't match, return an error
         if (!user) {
@@ -46,7 +46,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         if (!isPasswordValid) {
             console.log('Invalid password');
-            return res.status(401).json({ error: 'Invalid email or password' });
+            return res.status(401).json({ error: 'Invalid password' });
         }
 
         // Generate JWT token
@@ -60,12 +60,14 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
+app.get('/', async (req, res) => {
+    res.json({ message: "server is running time: " + new Date() })
+})
 
 // Connect to MongoDB by invoking the connectDB function
 connectDB();
 
 app.use('/api/inventory', inventoryRoutes);
-
 app.use('/api/auth', authRoutes);
 app.use('/api/invoice', invoiceRoutes);
 
